@@ -10,7 +10,7 @@ Selected Features: Index(['Sl. No', 'Patient File No.', ' Age (yrs)', 'Weight (K
 
 
 
-This Selection was done through RFECV
+This Selection was done through RFECV along with 10 more miscellanous features
 
 
 Code:
