@@ -1,0 +1,38 @@
+Selected Features: Index(['Sl. No', 'Patient File No.', ' Age (yrs)', 'Weight (Kg)',
+       'Height(Cm) ', 'BMI', 'Hb(g/dl)', 'Cycle(R/I)', 'Cycle length(days)',
+       'Marraige Status (Yrs)', 'FSH(mIU/mL)', 'LH(mIU/mL)', 'FSH/LH',
+       'Hip(inch)', 'Waist(inch)', 'Waist:Hip Ratio', 'TSH (mIU/L)',
+       'PRL(ng/mL)', 'Vit D3 (ng/mL)', 'PRG(ng/mL)', 'RBS(mg/dl)',
+       'Weight gain(Y/N)', 'hair growth(Y/N)', 'Skin darkening (Y/N)',
+       'Pimples(Y/N)', 'Fast food (Y/N)', 'Follicle No. (L)',
+       'Follicle No. (R)', 'Avg. F size (R) (mm)', 'Endometrium (mm)'],
+      dtype='object')
+
+
+
+This Selection was done through RFECV
+
+
+Code:
+'
+from sklearn.feature_selection import RFECV
+
+
+base_estimator = RandomForestClassifier(**best_params)
+
+
+rfe = RFECV(estimator=base_estimator, step=5, cv=5, scoring='accuracy')
+
+
+rfe.fit(X_train, y_train)
+
+
+selected_features = X_train.columns[rfe.support_]
+
+
+X_train_selected = rfe.transform(X_train)
+X_test_selected = rfe.transform(X_test)
+
+
+print("Selected Features:", selected_features)
+'
