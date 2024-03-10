@@ -12,7 +12,7 @@ These are the considered features: Index(['Sl. No', 'Patient File No.', ' Age (y
       dtype='object')
 
 
-This Selection was done through RFECV along with 10 more miscellanous features
+This Selection was done through RFECV 
 
 
 Code:
