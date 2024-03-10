@@ -38,3 +38,47 @@ X_test_selected = rfe.transform(X_test)
 
 print("Selected Features:", selected_features)
 '
+
+
+
+
+
+
+Age (yrs): The age of the patient in years.
+Weight (Kg): The weight of the patient in kilograms.
+Height(Cm): The height of the patient in centimeters.
+BMI: Body Mass Index, a measure of body fat based on height and weight.
+Blood Group: The blood group of the patient.
+Pulse rate(bpm): Pulse rate, measured in beats per minute, indicating heart rate.
+RR (breaths/min): Respiratory rate, measured in breaths per minute.
+Hb(g/dl): Hemoglobin level in grams per deciliter, a measure of blood oxygen-carrying capacity.
+Cycle(R/I): Menstrual cycle regularity/irregularity (e.g., regular or irregular).
+Cycle length(days): Length of the menstrual cycle in days.
+Marriage Status (Yrs): Duration of marriage in years.
+Pregnant(Y/N): Whether the patient is pregnant or not (0 for No, 1 for Yes).
+No. of abortions: Number of abortions the patient has had.
+FSH(mIU/mL): Follicle Stimulating Hormone level in milli-international units per milliliter.
+LH(mIU/mL): Luteinizing Hormone level in milli-international units per milliliter.
+FSH/LH: Ratio of Follicle Stimulating Hormone to Luteinizing Hormone.
+Hip(inch): Hip circumference in inches.
+Waist(inch): Waist circumference in inches.
+Waist:Hip Ratio: Ratio of waist circumference to hip circumference.
+TSH (mIU/L): Thyroid Stimulating Hormone level in milli-international units per liter.
+PRL(ng/mL): Prolactin level in nanograms per milliliter.
+Vit D3 (ng/mL): Vitamin D3 level in nanograms per milliliter.
+PRG(ng/mL): Progesterone level in nanograms per milliliter.
+RBS(mg/dl): Random Blood Sugar level in milligrams per deciliter.
+Weight gain(Y/N): Whether the patient has experienced weight gain or not (0 for No, 1 for Yes).
+Hair growth(Y/N): Whether the patient has experienced increased hair growth or not (0 for No, 1 for Yes).
+Skin darkening (Y/N): Whether the patient has experienced skin darkening or not (0 for No, 1 for Yes).
+Hair loss(Y/N): Whether the patient has experienced hair loss or not (0 for No, 1 for Yes).
+Pimples(Y/N): Whether the patient has experienced pimples or not (0 for No, 1 for Yes).
+Fast food (Y/N): Whether the patient consumes fast food or not (0 for No, 1 for Yes).
+Reg.Exercise(Y/N): Whether the patient engages in regular exercise or not (0 for No, 1 for Yes).
+BP _Systolic (mmHg): Systolic blood pressure in millimeters of mercury.
+BP _Diastolic (mmHg): Diastolic blood pressure in millimeters of mercury.
+Follicle No. (L): Number of follicles in the left ovary.
+Follicle No. (R): Number of follicles in the right ovary.
+Avg. F size (L) (mm): Average follicle size in the left ovary in millimeters.
+Avg. F size (R) (mm): Average follicle size in the right ovary in millimeters.
+Endometrium (mm): Thickness of the endometrium in millimeters.
