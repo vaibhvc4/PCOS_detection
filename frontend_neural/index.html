@@ -53,6 +53,40 @@
   </form>
 </body>
 <script>
+    document.getElementById("pcosForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent form submission
+        const formData = {
+            "Cycle(R/I)": parseFloat(document.getElementById("cycleRI").value),
+            "Weight gain(Y/N)": document.querySelector('input[name="Weight gain(Y/N)"]:checked').value === "1" ? 1 : 0,
+            "hair growth(Y/N)": document.querySelector('input[name="hair growth(Y/N)"]:checked').value === "1" ? 1 : 0,
+            "Skin darkening (Y/N)": document.querySelector('input[name="Skin darkening (Y/N)"]:checked').value === "1" ? 1 : 0,
+            "Follicle No. (L)": parseFloat(document.getElementById("follicleNoL").value),
+            "Follicle No. (R)": parseFloat(document.getElementById("follicleNoR").value)
+        };
+        
+        fetch('http://127.0.0.1:8000/predict', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.predictions && data.predictions.length > 0) {
+                const pcosPrediction = data.predictions[0]; // Assuming the prediction is the first element in the array
+                const pcosIndication = pcosPrediction >= 0.5 ? "Yes" : "No"; // Assuming 0.5 as the threshold for PCOS prediction
+                alert(`Based on the data provided, the indication is that the patient has PCOS: ${pcosIndication}`);
+            } else {
+                alert("Unable to determine PCOS status based on the provided data.");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
+<!-- <script>
         var for_pcos_yes = {
         "Sl. No": 0,
         "Patient File No.": 0,
@@ -186,7 +220,7 @@ document.getElementById("pcosForm").addEventListener("submit", function(event) {
 });
 
 
-  </script>
+  </script> -->
 </html>
 
 
