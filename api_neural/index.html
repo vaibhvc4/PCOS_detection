@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<title>PCOS Patient Information Form</title>
+</head>
+<body>
+  <h2>PCOS Patient Information Form</h2>
+  <form id="pcosForm">
+
+
+    <label for="cycleRI">Cycle(R/I):</label>
+    <input type="number" id="cycleRI" name="Cycle(R/I)" value=""><br>
+
+
+    <label for="weightGain">Weight gain:</label>
+    <div class="yes-no-container">
+    <input type="radio" id="weightGainYes" name="Weight gain(Y/N)" value="1">
+    <label for="weightGainYes">Yes</label>
+    <input type="radio" id="weightGainNo" name="Weight gain(Y/N)" value="0">
+    <label for="weightGainNo">No</label><br>
+    </div>
+
+    <label for="hairGrowth">Hair growth:</label>
+    <div class="yes-no-container">
+    <input type="radio" id="hairGrowthYes" name="hair growth(Y/N)" value="1">
+    <label for="hairGrowthYes">Yes</label>
+    <input type="radio" id="hairGrowthNo" name="hair growth(Y/N)" value="0">
+    <label for="hairGrowthNo">No</label><br>
+    </div>
+
+    <label for="skinDarkening">Skin darkening:</label>
+    <div class="yes-no-container">
+    <input type="radio" id="skinDarkeningYes" name="Skin darkening (Y/N)" value="1">
+    <label for="skinDarkeningYes">Yes</label>
+    <input type="radio" id="skinDarkeningNo" name="Skin darkening (Y/N)" value="0">
+    <label for="skinDarkeningNo">No</label><br>
+    </div>
+
+    
+    <label for="follicleNoL">Follicle No. (L):</label>
+    <input type="number" id="follicleNoL" name="Follicle No. (L)" value=""><br>
+
+    <label for="follicleNoR">Follicle No. (R):</label>
+    <input type="number" id="follicleNoR" name="Follicle No. (R)" value=""><br>
+
+
+
+    <input type="submit" value="Submit">
+  </form>
+</body>
+<script>
+    document.getElementById("pcosForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent form submission
+        const formData = {
+            "Cycle(R/I)": parseFloat(document.getElementById("cycleRI").value),
+            "Weight gain(Y/N)": document.querySelector('input[name="Weight gain(Y/N)"]:checked').value === "1" ? 1 : 0,
+            "hair growth(Y/N)": document.querySelector('input[name="hair growth(Y/N)"]:checked').value === "1" ? 1 : 0,
+            "Skin darkening (Y/N)": document.querySelector('input[name="Skin darkening (Y/N)"]:checked').value === "1" ? 1 : 0,
+            "Follicle No. (L)": parseFloat(document.getElementById("follicleNoL").value),
+            "Follicle No. (R)": parseFloat(document.getElementById("follicleNoR").value)
+        };
+        
+        fetch('http://127.0.0.1:8000/predict', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.predictions && data.predictions.length > 0) {
+                const pcosPrediction = data.predictions[0]; // Assuming the prediction is the first element in the array
+                const pcosIndication = pcosPrediction >= 0.5 ? "Yes" : "No"; // Assuming 0.5 as the threshold for PCOS prediction
+                alert(`Based on the data provided, the indication is that the patient has PCOS: ${pcosIndication}`);
+            } else {
+                alert("Unable to determine PCOS status based on the provided data.");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
+<!-- <script>
+        var for_pcos_yes = {
+        "Sl. No": 0,
+        "Patient File No.": 0,
+        " Age (yrs)": 28,
+        "Weight (Kg)": 68,
+        "Height(Cm) ": 155,
+        "BMI": 28.30385016,
+        "Blood Group": 13,
+        "Pulse rate(bpm) ": 74,
+        "RR (breaths/min)": 20,
+        "Hb(g/dl)": 11.2,
+        "Cycle(R/I)": 4,
+        "Cycle length(days)": 9,
+        "Marraige Status (Yrs)": 7,
+        "Pregnant(Y/N)": 0,
+        "No. of aborptions": 0,
+        "FSH(mIU/mL)": 5.71,
+        "LH(mIU/mL)": 4.31,
+        "FSH/LH": 1.324825986,
+        "Hip(inch)": 45,
+        "Waist(inch)": 37,
+        "Waist:Hip Ratio": 0.822222222,
+        "TSH (mIU/L)": 2.41,
+        "PRL(ng/mL)": 21.86,
+        "Vit D3 (ng/mL)": 18.3,
+        "PRG(ng/mL)": 0.35,
+        "RBS(mg/dl)": 100,
+        "Weight gain(Y/N)": 1,
+        "hair growth(Y/N)": 0,
+        "Skin darkening (Y/N)": 1,
+        "Hair loss(Y/N)": 1,
+        "Pimples(Y/N)": 1,
+        "Fast food (Y/N)": 1,
+        "Reg.Exercise(Y/N)": 1,
+        "BP _Systolic (mmHg)": 110,
+        "BP _Diastolic (mmHg)": 80,
+        "Follicle No. (L)": 21,
+        "Follicle No. (R)": 20,
+        "Avg. F size (L) (mm)": 15,
+        "Avg. F size (R) (mm)": 17,
+        "Endometrium (mm)": 11
+    };
+
+
+    for_pcos_no=
+        {
+    "Sl. No": 230,
+    "Patient File No.": 10230,
+    " Age (yrs)": 28,
+    "Weight (Kg)": 74.3,
+    "Height(Cm) ": 154,
+    "BMI": 31.32906055,
+    "Blood Group": 13,
+    "Pulse rate(bpm) ": 72,
+    "RR (breaths/min)": 18,
+    "Hb(g/dl)": 10.7,
+    "Cycle(R/I)": 2,
+    "Cycle length(days)": 5,
+    "Marraige Status (Yrs)": 6,
+    "Pregnant(Y/N)": 0,
+    "No. of aborptions": 3,
+    "FSH(mIU/mL)": 3.7,
+    "LH(mIU/mL)": 4.6,
+    "FSH/LH": 0.804347826,
+    "Hip(inch)": 38,
+    "Waist(inch)": 36,
+    "Waist:Hip Ratio": 0.947368421,
+    "TSH (mIU/L)": 1.7,
+    "PRL(ng/mL)": 46.25,
+    "Vit D3 (ng/mL)": 10.8,
+    "PRG(ng/mL)": 0.77,
+    "RBS(mg/dl)": 85,
+    "Weight gain(Y/N)": 1,
+    "hair growth(Y/N)": 0,
+    "Skin darkening (Y/N)": 1,
+    "Hair loss(Y/N)": 1,
+    "Pimples(Y/N)": 0,
+    "Fast food (Y/N)": 1,
+    "Reg.Exercise(Y/N)": 0,
+    "BP _Systolic (mmHg)": 110,
+    "BP _Diastolic (mmHg)": 80,
+    "Follicle No. (L)": 6,
+    "Follicle No. (R)": 5,
+    "Avg. F size (L) (mm)": 14,
+    "Avg. F size (R) (mm)": 13,
+    "Endometrium (mm)": 8.5
+};
+    
+
+
+
+    // Call the function to set default values
+    
+    
+// Call the function to set default values
+document.getElementById("pcosForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent form submission
+
+    // Extract keys from for_pcos_no
+    const formDataKeys = Object.keys(for_pcos_no);
+
+
+    // Create an object to hold form data with keys from for_pcos_no
+    const formData = {};
+    formDataKeys.forEach(key => {
+    // Check if the form element exists for the current key
+    if (event.target[key]) {
+        formData[key] = event.target[key].value; // Get the value from the form input field
+    } else {
+        console.log(`Form element not found for key: ${key}`);
+    }
+    console.log(formData)
+});
+    // Make a POST request to the FastAPI endpoint
+    fetch('http://127.0.0.1:8000/predict', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)  // Use the extracted keys as form data keys
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle response from the server
+        console.log("Predictions:", data.predictions);
+    })
+    .catch(error => {
+        // Handle errors
+        console.error('Error:', error);
+    });
+});
+
+
+  </script> -->
+</html>
+
+
